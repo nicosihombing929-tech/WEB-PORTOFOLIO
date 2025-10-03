@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nico Panogari Sihombing - Portofolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0a0a0a;
+            --secondary: #1a1a1a;
+            --accent: #ff6b35;
+            --text: #e0e0e0;
+            --text-light: #a0a0a0;
+            --border: #333333;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            --glow: 0 0 15px rgba(255, 107, 53, 0.3);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            background-color: var(--primary);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 100px 0 60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,107,53,0.1) 0%, rgba(255,107,53,0) 70%);
+            animation: pulse 15s infinite linear;
+            z-index: 1;
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 0.5;
+            }
+            50% {
+                transform: translate(-30%, -30%) scale(1.2);
+                opacity: 0.3;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 0.5;
+            }
+        }
+        
+        .profile-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 2;
+            transform: translateY(50px);
+            opacity: 0;
+            animation: fadeUp 1s ease forwards;
+        }
+        
+        @keyframes fadeUp {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        .profile-img {
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            border: 4px solid var(--accent);
+            object-fit: cover;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow), var(--glow);
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .profile-img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7), var(--glow);
+        }
+        
+        .profile-info h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            background: linear-gradient(45deg, #fff, var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 10px rgba(255,107,53,0.2);
+            font-weight: 800;
+        }
+        
+        .profile-info h2 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 30px;
+            opacity: 0.9;
+            color: var(--text-light);
+        }
+        
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--accent), #e55a2b);
+            color: white;
+            padding: 14px 35px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+            border: none;
+            cursor: pointer;
+            z-index: 1;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+            z-index: -1;
+        }
+        
+        .btn:hover::before {
+            left: 100%;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255,107,53,0.4);
+        }
+        
+        /* Sections */
+        section {
+            padding: 100px 0;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+            position: relative;
+        }
+        
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--text);
+            display: inline-block;
+            padding-bottom: 15px;
+            position: relative;
+            font-weight: 700;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, var(--accent), #ff9d7c);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+        
+        /* About */
+        .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            align-items: center;
+        }
+        
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .about-text p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            transition: transform 0.3s ease;
+            color: var(--text-light);
+        }
+        
+        .about-text p:hover {
+            transform: translateX(5px);
+            color: var(--text);
+        }
+        
+        .about-details {
+            flex: 1;
+            min-width: 300px;
+            background-color: var(--secondary);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--border);
+        }
+        
+        .about-details:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        .detail-item {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            transition: transform 0.3s ease;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        
+        .detail-item:hover {
+            transform: translateX(5px);
+            background-color: rgba(255,107,53,0.1);
+        }
+        
+        .detail-item i {
+            color: var(--accent);
+            margin-right: 15px;
+            font-size: 1.2rem;
+            width: 25px;
+            transition: transform 0.3s ease;
+        }
+        
+        .detail-item:hover i {
+            transform: scale(1.2);
+        }
+        
+        /* Education */
+        .education-timeline {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .education-timeline::before {
+            content: '';
+            position: absolute;
+            left: 30px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, var(--accent), #ff9d7c);
+            border-radius: 2px;
+        }
+        
+        .timeline-item {
+            background-color: var(--secondary);
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow);
+            position: relative;
+            border-left: 4px solid var(--accent);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            opacity: 0;
+            transform: translateX(-50px);
+            border: 1px solid var(--border);
+        }
+        
+        .timeline-item.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .timeline-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -42px;
+            top: 40px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: var(--accent);
+            border: 4px solid var(--secondary);
+            box-shadow: 0 0 0 3px var(--accent);
+        }
+        
+        .timeline-item h3 {
+            color: var(--text);
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .timeline-item .date {
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 10px;
+            display: inline-block;
+            padding: 5px 15px;
+            background-color: rgba(255,107,53,0.1);
+            border-radius: 20px;
+            border: 1px solid rgba(255,107,53,0.3);
+        }
+        
+        .timeline-item p {
+            color: var(--text-light);
+        }
+        
+        /* Hobbies & Experience */
+        .hobbies-experience {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+        
+        .hobbies, .experience {
+            flex: 1;
+            min-width: 300px;
+            background-color: var(--secondary);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            opacity: 0;
+            transform: translateY(30px);
+            border: 1px solid var(--border);
+        }
+        
+        .hobbies.visible, .experience.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .hobbies:hover, .experience:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        .hobbies h3, .experience h3 {
+            color: var(--text);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            position: relative;
+            padding-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .hobbies h3::after, .experience h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--accent);
+            border-radius: 2px;
+        }
+        
+        .hobby-item, .exp-item {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+            transition: transform 0.3s ease;
+        }
+        
+        .hobby-item:hover, .exp-item:hover {
+            transform: translateX(5px);
+        }
+        
+        .hobby-item:last-child, .exp-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .hobby-item i {
+            color: var(--accent);
+            margin-right: 10px;
+            transition: transform 0.3s ease;
+        }
+        
+        .hobby-item:hover i {
+            transform: scale(1.2);
+        }
+        
+        .hobby-item h4, .exp-item h4 {
+            color: var(--text);
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        .hobby-item p, .exp-item p {
+            color: var(--text-light);
+        }
+        
+        /* Contact */
+        .contact-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+        
+        .contact-info {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+            transition: transform 0.3s ease;
+            padding: 15px;
+            border-radius: 8px;
+        }
+        
+        .contact-item:hover {
+            transform: translateX(5px);
+            background-color: rgba(255,107,53,0.1);
+        }
+        
+        .contact-item i {
+            background: linear-gradient(135deg, var(--accent), #e55a2b);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+            box-shadow: var(--shadow);
+        }
+        
+        .contact-item:hover i {
+            transform: scale(1.1) rotate(5deg);
+        }
+        
+        .contact-form {
+            flex: 1;
+            min-width: 300px;
+            background-color: var(--secondary);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--border);
+        }
+        
+        .contact-form:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            transition: color 0.3s ease;
+            color: var(--text);
+        }
+        
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border);
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background-color: var(--primary);
+            color: var(--text);
+        }
+        
+        .form-group input:focus, .form-group textarea:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 2px rgba(255,107,53,0.2);
+            outline: none;
+        }
+        
+        .form-group textarea {
+            height: 150px;
+            resize: vertical;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--secondary);
+            color: var(--text-light);
+            text-align: center;
+            padding: 40px 0;
+            position: relative;
+            overflow: hidden;
+            border-top: 1px solid var(--border);
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(to right, var(--accent), #ff9d7c);
+        }
+        
+        .social-links {
+            margin-bottom: 20px;
+        }
+        
+        .social-links a {
+            color: var(--text-light);
+            font-size: 1.5rem;
+            margin: 0 15px;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .social-links a:hover {
+            color: var(--accent);
+            transform: translateY(-5px) scale(1.2);
+        }
+        
+        /* Floating Action Button */
+        .floating-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--accent), #e55a2b);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: var(--shadow), var(--glow);
+            cursor: pointer;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: scale(0);
+            border: none;
+        }
+        
+        .floating-btn.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        .floating-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 25px rgba(255,107,53,0.5);
+        }
+        
+        /* Loading Animation */
+        .loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+        
+        .loading.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+        
+        .spinner {
+            width: 70px;
+            height: 70px;
+            border: 5px solid rgba(255,107,53,0.3);
+            border-radius: 50%;
+            border-top-color: var(--accent);
+            animation: spin 1s ease-in-out infinite;
+            margin-bottom: 20px;
+        }
+        
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        
+        .loading-text {
+            color: var(--text);
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+        
+        /* Particle Background */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+        
+        .particle {
+            position: absolute;
+            background-color: rgba(255,107,53,0.5);
+            border-radius: 50%;
+            animation: float 15s infinite linear;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(100px);
+                opacity: 0;
+            }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .profile-info h1 {
+                font-size: 2.2rem;
+            }
+            
+            .profile-info h2 {
+                font-size: 1.2rem;
+            }
+            
+            section {
+                padding: 80px 0;
+            }
+            
+            .education-timeline::before {
+                left: 20px;
+            }
+            
+            .timeline-item::before {
+                left: -32px;
+            }
+            
+            .floating-btn {
+                bottom: 20px;
+                right: 20px;
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .profile-info h1 {
+                font-size: 1.8rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .profile-img {
+                width: 180px;
+                height: 180px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading" id="loading">
+        <div class="spinner"></div>
+        <div class="loading-text">Memuat Portofolio...</div>
+    </div>
+
+    <!-- Header Section -->
+    <header>
+        <div class="particles" id="particles"></div>
+        <div class="container">
+            <div class="profile-container">
+                <!-- Foto telah diintegrasikan langsung dari Google Drive -->
+                <img src="IMG_20251001_145709.jpg" alt="Foto Nico Panogari Sihombing" class="profile-img" id="profile-img">
+                <div class="profile-info">
+                    <h1>Nico Panogari Sihombing</h1>
+                    <h2>Mahasiswa Ilmu Komputer - Universitas Negeri Medan</h2>
+                    <a href="#contact" class="btn">Hubungi Saya</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>Tentang Saya</h2>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Saya adalah mahasiswa Ilmu Komputer di Universitas Negeri Medan dengan minat yang kuat dalam bidang Keuangan dan Teknoologi. Saya memiliki semangat belajar yang tinggi dan selalu berusaha untuk mengembangkan kemampuan saya di berbagai bidang.</p>
+                    <p>Selama menempuh pendidikan, saya mendapatkan banyak sekali pengalaman dalam berbagai bidang, mulai dari mengikuti sebuah perlombaan, Olimpiade, dan memahami konsep berbagai sistem Pendidikan. Saya selalu memilih untuk fokus pada bidang atau industri yang saya Suka dan kuasai.</p>
+                </div>
+                <div class="about-details">
+                    <div class="detail-item">
+                        <i class="fas fa-user"></i>
+                        <div>
+                            <strong>Nama Lengkap</strong>
+                            <p>Nico Panogari Sihombing</p>
+                        </div>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-university"></i>
+                        <div>
+                            <strong>Universitas</strong>
+                            <p>Universitas Negeri Medan</p>
+                        </div>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-graduation-cap"></i>
+                        <div>
+                            <strong>Jurusan/Prodi</strong>
+                            <p>Matematika / Ilmu Komputer (S1)</p>
+                        </div>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <strong>Asal</strong>
+                            <p>Bahal Batu II, Kab.Tapanuli Utara, Sumatra Utara</p>
+                        </div>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-birthday-cake"></i>
+                        <div>
+                            <strong>Tanggal Lahir</strong>
+                            <p>25 Juni 2007</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" style="background-color: var(--secondary);">
+        <div class="container">
+            <div class="section-title">
+                <h2>Pendidikan</h2>
+            </div>
+            <div class="education-timeline">
+                <div class="timeline-item">
+                    <h3>Universitas Negeri Medan</h3>
+                    <div class="date">Saat ini</div>
+                    <p>Jurusan: Matematika</p>
+                    <p>Program Studi: Ilmu Komputer (S1)</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>SMAS PGRI 20 Siborongborong</h3>
+                    <div class="date">Sekolah Menengah Atas</div>
+                    <p>Melanjutkan pendidikan di tingkat menengah atas dengan fokus pada pengembangan kemampuan akademik dan non-akademik.</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>SMP Negeri 3 Sipahutar</h3>
+                    <div class="date">Sekolah Menengah Pertama</div>
+                    <p>Mengembangkan dasar-dasar pengetahuan dan keterampilan yang diperlukan untuk melanjutkan pendidikan ke jenjang yang lebih tinggi.</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>SD Negeri 176244 AEKMAS</h3>
+                    <div class="date">Sekolah Dasar</div>
+                    <p>Pendidikan dasar yang membentuk fondasi pengetahuan dan karakter.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hobbies & Experience Section -->
+    <section id="hobbies-experience">
+        <div class="container">
+            <div class="section-title">
+                <h2>Hobi & Pengalaman</h2>
+            </div>
+            <div class="hobbies-experience">
+                <div class="hobbies">
+                    <h3>Hobi</h3>
+                    <div class="hobby-item">
+                        <i class="fas fa-book"></i>
+                        <div>
+                            <h4>Membaca</h4>
+                            <p>Saya mempunyai hobi membaca, terutama yang berkaitan dengan dunia Financial dan Investasi. Saya percaya bahwa pengetahuan finansial adalah kunci untuk mencapai kemandirian ekonomi.</p>
+                        </div>
+                    </div>
+                    <div class="hobby-item">
+                        <i class="fas fa-laptop-code"></i>
+                        <div>
+                            <h4>Pemrograman</h4>
+                            <p>Sebagai mahasiswa Ilmu Komputer, saya menikmati waktu luang dengan mempelajari sedikit demi sedikit bahasa pemrograman dan mengembangkan penetahuan saya di bidang Investasi.</p>
+                        </div>
+                    </div>
+                    <div class="hobby-item">
+                        <i class="fas fa-chart-line"></i>
+                        <div>
+                            <h4>Analisis Finansial</h4>
+                            <p>Saya tertarik menganalisis tren pasar dan mempelajari strategi investasi untuk pengembangan keuangan pribadi.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="experience">
+                    <h3>Pengalaman</h3>
+                    <div class="exp-item">
+                        <h4>Peserta Olimpiade</h4>
+                        <p>Berpartisipasi dalam berbagai kompetisi akademik yang mengasah kemampuan berpikir kritis dan pemecahan masalah.</p>
+                    </div>
+                    <div class="exp-item">
+                        <h4>Pengembangan Diri</h4>
+                        <p>Terus mengembangkan keterampilan di bidang  Keuangan dan Teknoologi melalui pembelajaran mandiri dan kursus online.</p>
+                    </div>
+                    <div class="exp-item">
+                        <h4>Pemahaman Sistem Pendidikan</h4>
+                        <p>Memiliki pengalaman dalam memahami berbagai konsep dan sistem pendidikan yang berbeda melalui perjalanan akademik.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" style="background-color: var(--secondary);">
+        <div class="container">
+            <div class="section-title">
+                <h2>Kontak</h2>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h4>Telepon</h4>
+                            <p>089679071517</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4>Email</h4>
+                            <p>nicosihombing929@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h4>Alamat</h4>
+                            <p>Jalan Sering, No.104, Medan Tembung, Kota Medan, Sumatra Utara</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-university"></i>
+                        <div>
+                            <h4>Kampus</h4>
+                            <p>Universitas Negeri Medan</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Nama</label>
+                            <input type="text" id="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subjek</label>
+                            <input type="text" id="subject" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Pesan</label>
+                            <textarea id="message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn">Kirim Pesan</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-facebook"></i></a>
+            </div>
+            <p>&copy; 2025 Nico Panogari Sihombing.</p>
+        </div>
+    </footer>
+
+    <!-- Floating Action Button -->
+    <div class="floating-btn" id="scrollToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script>
+        // Loading screen
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.getElementById('loading').classList.add('hidden');
+            }, 2000);
+        });
+
+        // Create particle background
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 30;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Random properties
+                const size = Math.random() * 10 + 5;
+                const left = Math.random() * 100;
+                const animationDuration = Math.random() * 20 + 10;
+                const animationDelay = Math.random() * 5;
+                
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${left}%`;
+                particle.style.animationDuration = `${animationDuration}s`;
+                particle.style.animationDelay = `${animationDelay}s`;
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+        
+        createParticles();
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    
+                    // Animate timeline items sequentially
+                    if (entry.target.id === 'education') {
+                        const timelineItems = document.querySelectorAll('.timeline-item');
+                        timelineItems.forEach((item, index) => {
+                            setTimeout(() => {
+                                item.classList.add('visible');
+                            }, index * 300);
+                        });
+                    }
+                    
+                    // Animate hobbies and experience sections
+                    if (entry.target.id === 'hobbies-experience') {
+                        const hobbies = document.querySelector('.hobbies');
+                        const experience = document.querySelector('.experience');
+                        
+                        setTimeout(() => {
+                            hobbies.classList.add('visible');
+                        }, 200);
+                        
+                        setTimeout(() => {
+                            experience.classList.add('visible');
+                        }, 500);
+                    }
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Scroll to top button
+        const scrollToTopBtn = document.getElementById('scrollToTop');
+        
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                scrollToTopBtn.classList.add('active');
+            } else {
+                scrollToTopBtn.classList.remove('active');
+            }
+        });
+
+        scrollToTopBtn.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Form submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Simple form validation
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+            
+            if (name && email && subject && message) {
+                // In a real application, you would send the form data to a server here
+                alert('Terima kasih! Pesan Anda telah dikirim. Saya akan menghubungi Anda segera.');
+                document.getElementById('contactForm').reset();
+            } else {
+                alert('Harap lengkapi semua field sebelum mengirim pesan.');
+            }
+        });
+
+        // Profile image upload simulation
+        document.getElementById('profile-img').addEventListener('click', function() {
+            alert('Foto Anda telah terintegrasi dengan sempurna!');
+        });
+    </script>
+</body>
+</html>
